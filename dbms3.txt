@@ -1,0 +1,138 @@
+Day 3:
+Assignment 3:
+
+
+1. Display name of employees , department name and job name for each employee 
+2. Display the department name along with no of employees and average salary of that department 
+3. For each department, find out no. of jobs the employees are assigned to. 
+4. Check for correctness of the above queries in terms of count, if you want to bring in all entries, how would you achieve the same? 
+5. Group by the employees based on the first character of employee first name. Display the results in alphabetic order (descending) of first character. 
+6. Display name of those employees who get a salary more than the average salary 
+7. Display name of the all the employees who are ‘stock manager’, except the one who gets the minimum salary. 
+
+8.  Display firstname, lastname, salary of those sales representatives who earns a higher salary than the minimum salary a sales manager receives. 
+9. Display the name of the employees/employee who gets the second highest salary. (sub query) 
+10. Come up with the query for previous question using set operators 
+11. Display the name of the employee (manager) who has the maximum no. of employees reporting to him. 
+12. Display the name of those employees , who are in the same department as Timothy Gates and gets an salary more than the average salary of all the employees 
+
+13. If an employee have spent less than 5 years then he is considered entry level id 5 – 10 then midlevel else a senior employee. Write a query, which will label the employees in either of the above categories 
+14. Write query to find out any departments that are present in department table but does not have employees 
+15. Write a query which will display job id , which are present in both job and employee columns 
+16. Increase salary of each employee of all the department who draws the minimum salary by 100$. 
+
+
+JOIN QUERIES: 
+
+1. Display name of employees, department name and job name for each employee
+
+2. Display the department name along with no of employees and average salary of that department
+
+3. For each department find out number of jobs the employees are assigned to
+
+4. Check for correctness of the above queries in terms of count, if you want to bring in all entries, how would you achieve the same?
+ 
+5. Group the employees based on the first character of employee's first name. Display the results in alphabetic order (descending) of first character. 
+
+6. Display name of those employees who get salary more than the average salary.
+
+solutions :
+
+JOIN QUERIES
+
+1.
+SQL> select ename,dname,job from emp,dept where emp.deptno = dept.deptno ;
+
+ENAME      DNAME          JOB
+---------- -------------- ---------
+SMITH      RESEARCH       CLERK
+ALLEN      SALES          SALESMAN
+WARD       SALES          SALESMAN
+JONES      RESEARCH       MANAGER
+MARTIN     SALES          SALESMAN
+BLAKE      SALES          MANAGER
+CLARK      ACCOUNTING     MANAGER
+SCOTT      RESEARCH       ANALYST
+KING       ACCOUNTING     PRESIDENT
+TURNER     SALES          SALESMAN
+ADAMS      RESEARCH       CLERK
+
+ENAME      DNAME          JOB
+---------- -------------- ---------
+JAMES      SALES          CLERK
+FORD       RESEARCH       ANALYST
+MILLER     ACCOUNTING     CLERK
+
+14 rows selected.
+
+2.
+SQL> select dname,count(*),avg(sal) avg from dept,emp where dept.deptno = emp.de
+ptno group by dname;
+
+DNAME            COUNT(*)        AVG
+-------------- ---------- ----------
+ACCOUNTING              3 2916.66667
+RESEARCH                5       2175
+SALES
+                   6 1566.66667
+3.
+SQL> select dname,count(job) from emp,dept where emp.deptno = dept.deptno group
+by dname;
+
+DNAME          COUNT(JOB)
+-------------- ----------
+ACCOUNTING              3
+RESEARCH                5
+SALES                   6
+
+4.
+
+
+
+s
+
+5.
+
+SQL> select ename from emp group by ename having ename like '_%' order by ename
+desc;
+
+ENAME
+----------
+WARD
+TURNER
+SMITH
+SCOTT
+MILLER
+MARTIN
+KING
+JONES
+JAMES
+FORD
+CLARK
+
+ENAME
+----------
+BLAKE
+ALLEN
+ADAMS
+
+14 rows selected.
+
+6.
+
+SQL> select e.ename,e.sal,b.avg from emp e,(select avg(sal) avg from emp group b
+y null)b where e.sal > b.avg ;
+
+ENAME             SAL        AVG
+---------- ---------- ----------
+KING             5000 2073.21429
+FORD             3000 2073.21429
+SCOTT            3000 2073.21429
+JONES            2975 2073.21429
+BLAKE            2850 2073.21429
+CLARK            2450 2073.21429
+
+6 rows selected.
+
+
+

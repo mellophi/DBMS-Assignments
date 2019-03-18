@@ -1,0 +1,343 @@
+ASSIGNMENT - 1
+
+
+1.Make your own student table with certain necessary facts, like your id, name, branch.
+2.Fill up the table with the records of at least 10 of your friends.
+3.It sounds good if you say roll instead of id. so, change it.
+4.Here, I think age and address could also be added. So, append it with default address of all students as Kolkata.
+5.Fill up the records with individual student's age.
+6.How do I identify each student uniquely? So make roll number as your primary key.
+7.Don't keep the name field blank for any record.
+8.Add marks column in the table and add values.
+9.Identify the students who have passed the exam. Cut off marks is 50%. 
+10.If any student fails, discard his record from the database.  
+11.Remove the address field from your table. 
+12.Copy the contents from emp table to a new table.
+13.Show the employee records from your new table.
+14.Show salary statement along with name of all employees whose salary>1000.
+15.How many such employees are there whose salary is within 1000 to 3000 range? 
+16.Give a pay hike to the employees whose salary is 1250 and 950.
+17.Suggest a meaningful name for salary hike column .
+18.How many types of jobs are there in this company?
+19.Give a salary hike of 15% to the employees who have joined the company before 31st Dec 1981.
+
+
+
+
+SQL> create table parijat(id number,name varchar2(40),branch varchar2(20));
+
+Table created.
+
+
+SQL> select * from parijat;
+
+no rows selected
+
+SQL> insert into parijat values(1,'Riya','cse');
+
+1 row created.
+
+SQL> select * from parijat;
+
+        ID NAME                                     BRANCH
+---------- ---------------------------------------- --------------------
+         1 Riya                                     cse
+
+SQL>
+SQL> insert into parijat values(&id,'&name','&branch');
+Enter value for id: 2
+Enter value for name: Parijat
+Enter value for branch: cse
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(2,'Parijat','cse')
+
+1 row created.
+
+SQL> /
+Enter value for id: 3
+Enter value for name: Ayon
+Enter value for branch: cse
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(3,'Ayon','cse')
+
+1 row created.
+
+SQL> /
+Enter value for id: 4
+Enter value for name: Attri
+Enter value for branch: ece
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(4,'Attri','ece')
+
+1 row created.
+
+SQL> /
+Enter value for id: 5
+Enter value for name: Arnab
+Enter value for branch: IT
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(5,'Arnab','IT')
+
+1 row created.
+
+SQL> /
+Enter value for id: 6
+Enter value for name: Ankur
+Enter value for branch: EEE
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(6,'Ankur','EEE')
+
+1 row created.
+
+SQL> /
+Enter value for id: 7
+Enter value for name: Ranajit
+Enter value for branch: Civil
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(7,'Ranajit','Civil')
+
+1 row created.
+
+SQL> /
+Enter value for id: 8
+Enter value for name: Bipul
+Enter value for branch: EEE
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(8,'Bipul','EEE')
+
+1 row created.
+
+SQL> /
+Enter value for id: 9
+Enter value for name: Ritu
+Enter value for branch: cse
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(9,'Ritu','cse')
+
+1 row created.
+
+SQL> /
+Enter value for id: 10
+Enter value for name: Juhi
+Enter value for branch: IT
+old   1: insert into parijat values(&id,'&name','&branch')
+new   1: insert into parijat values(10,'Juhi','IT')
+
+1 row created.
+
+SQL> select * from parijat;
+
+        ID NAME                                     BRANCH
+---------- ---------------------------------------- --------------------
+         1 Riya                                     cse
+         2 Parijat                                  cse
+         3 Ayon                                     cse
+         4 Attri                                    ece
+         5 Arnab                                    IT
+         6 Ankur                                    EEE
+         7 Ranajit                                  Civil
+         8 Bipul                                    EEE
+         9 Ritu                                     cse
+        10 Juhi                                     IT
+
+10 rows selected.
+
+
+SQL> alter table parijat rename column id to roll;
+
+Table altered.
+
+SQL> select * from parijat;
+
+      ROLL NAME                                     BRANCH
+---------- ---------------------------------------- --------------------
+         1 Riya                                     cse
+         2 Parijat                                  cse
+         3 Ayon                                     cse
+         4 Attri                                    ece
+         5 Arnab                                    IT
+         6 Ankur                                    EEE
+         7 Ranajit                                  Civil
+         8 Bipul                                    EEE
+         9 Ritu                                     cse
+        10 Juhi                                     IT
+
+10 rows selected.
+
+SQL>
+
+
+10 rows selected.
+
+SQL> update parijat set age = 22 where name = 'Riya';
+
+1 row updated.
+
+SQL> update parijat set age = 21 where name = 'Ritu';
+
+1 row updated.
+
+SQL> update parijat set age = 21 where name = 'Ankur';
+
+1 row updated.
+
+SQL> update parijat set age = 22 where name = 'Bipul';
+
+1 row updated.
+
+SQL> select * from parijat;
+
+      ROLL NAME       BRANCH                      AGE ADDRESS
+---------- ---------- -------------------- ---------- --------------------
+         1 Riya       cse                          22 Kolkata
+         2 Parijat    cse                          20 Kolkata
+         3 Ayon       cse                          20 Kolkata
+         4 Attri      ece                          20 Kolkata
+         5 Arnab      IT                           20 Kolkata
+         6 Ankur      EEE                          21 Kolkata
+         7 Ranajit    Civil                        20 Kolkata
+         8 Bipul      EEE                          22 Kolkata
+         9 Ritu       cse                          21 Kolkata
+        10 Juhi       IT                           20 Kolkata
+
+10 rows selected.
+SQL> desc parijat;
+ Name
+                                   Null?    Type
+ -------------------------------------------------------------------------------
+---------------------------------- -------- ------------------------------------
+----------------------------------------
+ ROLL
+                                   NOT NULL NUMBER
+ NAME
+                                   NOT NULL VARCHAR2(10)
+ BRANCH
+                                            VARCHAR2(10)
+ AGE
+                                            NUMBER
+ ADDRESS
+                                            VARCHAR2(20)
+ MARKS
+                                            NUMBER
+
+
+SQL> select * from parijat where marks >= 50 ;
+
+      ROLL NAME       BRANCH            AGE ADDRESS                   MARKS
+---------- ---------- ---------- ---------- -------------------- ----------
+         1 Riya       cse                22 Kolkata                      80
+         2 Parijat    cse                20 Kolkata                      80
+         3 Ayon       cse                20 Kolkata                      80
+         4 Attri      ece                20 Kolkata                      80
+         5 Arnab      IT                 20 Kolkata                      90
+         6 Ankur      EEE                21 Kolkata                      60
+         7 Ranajit    Civil              20 Kolkata                      80
+         9 Ritu       cse                21 Kolkata                      71
+        10 Juhi       IT                 20 Kolkata                      80
+
+9 rows selected.
+
+
+SQL> delete from parijat where marks<50 ;
+
+1 row deleted.
+
+SQL> alter table parijat drop column address;
+
+Table altered.
+
+SQL> select * from parijat;
+
+      ROLL NAME       BRANCH            AGE      MARKS
+---------- ---------- ---------- ---------- ----------
+         1 Riya       cse                22         80
+         2 Parijat    cse                20         80
+         3 Ayon       cse                20         80
+         4 Attri      ece                20         80
+         5 Arnab      IT                 20         90
+         6 Ankur      EEE                21         60
+         7 Ranajit    Civil              20         80
+         9 Ritu       cse                21         71
+        10 Juhi       IT                 20         80
+
+9 rows selected.
+
+
+SQL> create table emp_copy as select empno , ename , job , sal from emp ;
+
+Table created.
+
+SQL> select * from emp_copy;
+
+     EMPNO ENAME      JOB              SAL
+---------- ---------- --------- ----------
+      7369 SMITH       CLERK            800
+      7499 ALLEN       SALESMAN        1600
+      7521 WARD       SALESMAN        1250
+      7566 JONES       MANAGER         2975
+      7654 MARTIN     SALESMAN        1250
+      7698 BLAKE       MANAGER         2850
+      7782 CLARK       MANAGER         2450
+      7788 SCOTT        ANALYST         3000
+      7839 KING          PRESIDENT       5000
+      7844 TURNER     SALESMAN        1500
+      7876 ADAMS      CLERK           1100
+
+     EMPNO ENAME      JOB              SAL
+---------- ---------- --------- ----------
+      7900 JAMES      CLERK            950
+      7902 FORD       ANALYST         3000
+      7934 MILLER     CLERK           1300
+
+14 rows selected.
+
+SQL> select count(empno) from emp_copy where sal>= 1000 and sal<= 3000 ;
+
+COUNT(EMPNO)
+------------
+          11
+
+
+SQL> select empno , ename , job , sal , sal+200 from emp_copy where sal in(950,1250);
+
+     EMPNO ENAME      JOB              SAL    SAL+200
+---------- ---------- --------- ---------- ----------
+      7521 WARD         SALESMAN        1250       1450
+      7654 MARTIN     SALESMAN        1250       1450
+      7900 JAMES        CLERK                   950       1150
+
+SQL> select empno , ename , job , sal , sal+200 sal_hike from emp_copy where sal in(950,1250);
+
+     EMPNO ENAME      JOB              SAL   SAL_HIKE
+---------- ---------- --------- ---------- ----------
+      7521 WARD         SALESMAN        1250       1450
+      7654 MARTIN     SALESMAN        1250       1450
+      7900 JAMES        CLERK                  950       1150
+
+
+SQL> select count(distinct job) from emp_copy;
+
+COUNT(DISTINCTJOB)
+------------------
+                 5
+
+
+
+SQL> select sal * 1.15 sal_after_hike from emp where hiredate<'31-DEC-81';
+
+SAL_AFTER_HIKE
+--------------
+           920
+          1840
+        1437.5
+       3421.25
+        1437.5
+        3277.5
+        2817.5
+          5750
+          1725
+        1092.5
+          3450
+
+11 rows selected.
+

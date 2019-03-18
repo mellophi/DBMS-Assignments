@@ -1,0 +1,389 @@
+SQL> create table abhi as select * from emp;
+
+Table created.
+
+SQL> select * from abhi;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800
+        20
+
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300
+        30
+
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7566 JONES      MANAGER         7839 02-APR-81       2975
+        20
+
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400
+        30
+
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450
+        10
+
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000
+        20
+
+      7839 KING       PRESIDENT            17-NOV-81       5000
+        10
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0
+        30
+
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100
+        20
+
+      7900 JAMES      CLERK           7698 03-DEC-81        950
+        30
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO
+----------
+      7902 FORD       ANALYST         7566 03-DEC-81       3000
+        20
+
+      7934 MILLER     CLERK           7782 23-JAN-82       1300
+        10
+
+
+14 rows selected.
+
+
+
+
+
+SQL> select empno , ename, job from abhi;
+
+     EMPNO ENAME      JOB
+---------- ---------- ---------
+      7369 SMITH      CLERK
+      7499 ALLEN      SALESMAN
+      7521 WARD       SALESMAN
+      7566 JONES      MANAGER
+      7654 MARTIN     SALESMAN
+      7698 BLAKE      MANAGER
+      7782 CLARK      MANAGER
+      7788 SCOTT      ANALYST
+      7839 KING       PRESIDENT
+      7844 TURNER     SALESMAN
+      7876 ADAMS      CLERK
+
+     EMPNO ENAME      JOB
+---------- ---------- ---------
+      7900 JAMES      CLERK
+      7902 FORD       ANALYST
+      7934 MILLER     CLERK
+
+14 rows selected.
+
+
+
+
+SQL> select distinct job from abhi;
+
+JOB
+---------
+CLERK
+SALESMAN
+PRESIDENT
+MANAGER
+ANALYST
+
+
+
+SQL> select ename from abhi where job='SALESMAN';
+
+ENAME
+----------
+ALLEN
+WARD
+MARTIN
+TURNER
+
+
+
+
+SQL> select ename,job,sal from abhi;
+
+ENAME      JOB              SAL
+---------- --------- ----------
+SMITH      CLERK            800
+ALLEN      SALESMAN        1600
+WARD       SALESMAN        1250
+JONES      MANAGER         2975
+MARTIN     SALESMAN        1250
+BLAKE      MANAGER         2850
+CLARK      MANAGER         2450
+SCOTT      ANALYST         3000
+KING       PRESIDENT       5000
+TURNER     SALESMAN        1500
+ADAMS      CLERK           1100
+
+ENAME      JOB              SAL
+---------- --------- ----------
+JAMES      CLERK            950
+FORD       ANALYST         3000
+MILLER     CLERK           1300
+
+14 rows selected.
+
+SQL> select ename , sal , 200/sal*100 pctincr from abhi;
+
+ENAME             SAL    PCTINCR
+---------- ---------- ----------
+SMITH             800         25
+ALLEN            1600       12.5
+WARD             1250         16
+JONES            2975 6.72268908
+MARTIN           1250         16
+BLAKE            2850 7.01754386
+CLARK            2450 8.16326531
+SCOTT            3000 6.66666667
+KING             5000          4
+TURNER           1500 13.3333333
+ADAMS            1100 18.1818182
+
+ENAME             SAL    PCTINCR
+---------- ---------- ----------
+JAMES             950 21.0526316
+FORD             3000 6.66666667
+MILLER           1300 15.3846154
+
+14 rows selected.
+
+SQL> select months_between (sysdate,hiredate)/12  EXP from abhi;
+
+       EXP
+----------
+38.1790295
+38.0042983
+ 37.998922
+37.8860187
+37.3994596
+37.8053736
+37.7005349
+31.8403198
+37.2623628
+ 37.453223
+31.7462338
+
+       EXP
+----------
+37.2166639
+37.2166639
+37.0795671
+
+14 rows selected.
+
+SQL> select months_between (sysdate,hiredate)/12  EXP from abhi;
+
+       EXP
+----------
+38.1790295
+38.0042983
+ 37.998922
+37.8860187
+37.3994596
+37.8053736
+37.7005349
+31.8403198
+37.2623628
+ 37.453223
+31.7462338
+
+       EXP
+----------
+37.2166639
+37.2166639
+37.0795671
+
+14 rows selected.
+
+
+SQL> select ename from abhi where job  in ('CLERK','MANAGER');
+
+ENAME
+----------
+SMITH
+JONES
+BLAKE
+CLARK
+ADAMS
+JAMES
+MILLER
+
+7 rows selected.
+
+
+SQL> select ename||' IS A '||job||' WORKING FOR '|| round(months_between (sysdat
+e,hiredate)/12,0) ||' YEARS' from abhi;
+
+ENAME||'ISA'||JOB||'WORKINGFOR'||ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE)/12,0)||'
+
+--------------------------------------------------------------------------------
+
+SMITH IS A CLERK WORKING FOR 38 YEARS
+ALLEN IS A SALESMAN WORKING FOR 38 YEARS
+WARD IS A SALESMAN WORKING FOR 38 YEARS
+JONES IS A MANAGER WORKING FOR 38 YEARS
+MARTIN IS A SALESMAN WORKING FOR 37 YEARS
+BLAKE IS A MANAGER WORKING FOR 38 YEARS
+CLARK IS A MANAGER WORKING FOR 38 YEARS
+SCOTT IS A ANALYST WORKING FOR 32 YEARS
+KING IS A PRESIDENT WORKING FOR 37 YEARS
+TURNER IS A SALESMAN WORKING FOR 37 YEARS
+ADAMS IS A CLERK WORKING FOR 32 YEARS
+
+ENAME||'ISA'||JOB||'WORKINGFOR'||ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE)/12,0)||'
+
+--------------------------------------------------------------------------------
+
+JAMES IS A CLERK WORKING FOR 37 YEARS
+FORD IS A ANALYST WORKING FOR 37 YEARS
+MILLER IS A CLERK WORKING FOR 37 YEARS
+
+
+
+
+SQL> select ename from abhi where hiredate like '%80' or hiredate like '%81';
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+KING
+TURNER
+JAMES
+FORD
+
+11 rows selected.
+
+
+
+SQL> select ename from abhi where ename like 'A%';
+
+ENAME
+----------
+ALLEN
+ADAMS
+
+
+SQL> select ename  from abhi where hiredate < '31-DEC-1982' and job='CLERK' or s
+al >2500;
+
+ENAME
+----------
+SMITH
+JONES
+BLAKE
+SCOTT
+KING
+JAMES
+FORD
+MILLER
+
+8 rows selected.
+
+SQL> select job,count(*) ,min(sal), max(sal) from abhi group by job;
+
+JOB         COUNT(*)   MIN(SAL)   MAX(SAL)
+--------- ---------- ---------- ----------
+CLERK              4        800       1300
+SALESMAN           4       1250       1600
+PRESIDENT          1       5000       5000
+MANAGER            3       2450       2975
+ANALYST            2       3000       3000
+
+
+
+SQL> select deptno ,count(*) from abhi where sal>5000 group by deptno ;
+
+no rows selected
+
+
+
+SQL> select deptno from abhi group by deptno having avg(sal)>6500;
+
+no rows selected
+
+
+
+
+SQL> insert into abhi values(200,'SCOTT' ,'president',9999,'01-FEB-14',5000,10,1
+1);
+
+1 row created.
+
+
+
+
+
+SQL> select to_char(hiredate,'fmMonth,fmddth,yyyy') hdate from abhi;
+
+HDATE
+-------------------
+December,17th,1980
+February,20th,1981
+February,22nd,1981
+April,02nd,1981
+September,28th,1981
+May,01st,1981
+June,09th,1981
+April,19th,1987
+November,17th,1981
+September,08th,1981
+May,23rd,1987
+
+HDATE
+-------------------
+December,03rd,1981
+December,03rd,1981
+January,23rd,1982
+February,01st,2014
+
+15 rows selected.
+
+SQL> select last_name , length(last_name) len  from abhi order by len;
+
+LAST_NAME                        LEN
+------------------------- ----------
+King                               4
+Ernst                              5
+Hunold                             6
+Austin                             6
+Kochhar                            7
+De Haan                            7
+Pataballa                          9
+
+7 rows selected.
+
